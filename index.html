@@ -46,7 +46,7 @@
                      <form>
                         <div class="mb-3">
                            <label for="tituloInput" class="form-label">Título:</label>
-                           <input value="Terra de Mamona" type="text" id="tituloInput" class="form-control">
+                           <input value="Água de Hiena Selvagem" type="text" id="tituloInput" class="form-control">
                         </div>
                         <div class="mb-3">
                            <label for="conteudoInput" class="form-label">Conteúdo Líquido:</label>
@@ -54,12 +54,17 @@
                         </div>
                         <div class="mb-3">
                            <label for="ingredientesInput" class="form-label">Ingredientes:</label>
-                           <input value="Sebo de Cavalo, Raiz de Ouro e Alecrim." type="text" id="ingredientesInput" class="form-control">
+                           <input value="Água, Hiena." type="text" id="ingredientesInput" class="form-control">
                         </div>
                         <div class="mb-3">
                            <label for="sugestaoInput" class="form-label">Sugestão de Uso:</label>
                            <input value="20 gotas, 2 vezes ao dia." type="text" id="sugestaoInput" class="form-control">
                         </div>
+                        <div class="mb-3">
+							<label for="urlImagemInput" class="form-label">URL da Imagem: <a href="https://pngimg.com/">(pngimg.com)</a> </label>
+							<input value="https://pngimg.com/uploads/hyena/hyena_PNG25.png" type="url" id="urlImagemInput" class="form-control">
+						</div>
+
                         <div class="mb-3">
                             <label for="corFundo" class="form-label">Cor do Fundo:</label>
                             <input type="color" id="corFundo" class="form-control" value="#63c790">
@@ -80,7 +85,8 @@
                      <div class="h-full rounded-lg text-white flex" id="fundo">
                         <!-- Adicionando a div vermelha com o tamanho definido -->
                         <div class="w-1/3 mb-4 flex flex-col h-full" id="ingredientesOutput"></div>
-                        <div class="w-fit mb-4 ml-auto mr-auto flex flex-col h-full" id="tituloOutput"></div>
+                        <div class="w-fit mb-4 ml-auto mr-auto flex flex-col h-full bg-cover bg-center" id="tituloOutput" style="background-image: url('https://pngimg.com/uploads/lion/lion_PNG23266.png');"></div>
+
                         <div class="w-1/3 mb-4 flex flex-col h-full" id="conteudoOutput"></div>
                      </div>
                   </div>
@@ -102,17 +108,21 @@
          const fundo = document.getElementById('fundo');
          const borda = document.getElementById('borda');
          
-         function updateOutput() {
-             const corFundoSelecionada = corFundoInput.value;
-             const corBordaSelecionada = corBordaInput.value;
-             borda.style.backgroundColor = corBordaSelecionada;
-             fundo.style.backgroundColor = corFundoSelecionada;
-         
-             tituloOutput.innerHTML = `<h3 class="text-center text-4xl break-normal poetsen-one-regular ">${tituloInput.value}</h3>
-             <p class="text-center items-end mt-auto poetsen-one-regular p-1">Conteudo Líquido ${conteudoInput.value}</p>`;
-             conteudoOutput.innerHTML = `<p class="text-right p-1 mb-1 text-lg style-script-regular"><b><em>Produto Natural</em></b></p><div class="mr-1 mt-auto mb-1 ml-auto flex justify-center items-center bg-yellow-200 rounded-full border-2 border-red-500 h-12 w-12 opacity-75" >🌿</div><div class="bg-white bg-opacity-100 rounded-lg m-1 h-12"></div>`;
-             ingredientesOutput.innerHTML = `<p class="text-left p-1 mb-1"><b>Ingredientes:</b> <br> ${ingredientesInput.value}</p><p class="m-1"><b>SUGESTÃO DE USO:</b> <br> ${sugestaoInput.value}</p><div class="bg-white bg-opacity-25 rounded-lg m-1 mt-auto h-16"></div>`;
-         }
+function updateOutput() {
+    const corFundoSelecionada = corFundoInput.value;
+    const corBordaSelecionada = corBordaInput.value;
+    borda.style.backgroundColor = corBordaSelecionada;
+    fundo.style.backgroundColor = corFundoSelecionada;
+
+    const urlImagem = document.getElementById('urlImagemInput').value;
+    tituloOutput.style.backgroundImage = `url('${urlImagem}')`;
+
+    tituloOutput.innerHTML = `<h3 class="text-center text-4xl break-normal poetsen-one-regular ">${tituloInput.value}</h3>
+    <p class="text-center items-end mt-auto poetsen-one-regular p-1">Conteudo Líquido ${conteudoInput.value}</p>`;
+    conteudoOutput.innerHTML = `<p class="text-right p-1 mb-1 text-lg style-script-regular"><b><em>Produto Natural</em></b></p><div class="mr-1 mt-auto mb-1 ml-auto flex justify-center items-center bg-yellow-200 rounded-full border-2 border-red-500 h-12 w-12 opacity-75" >🌿</div><div class="bg-white bg-opacity-100 rounded-lg m-1 h-12"></div>`;
+    ingredientesOutput.innerHTML = `<p class="text-left p-1 mb-1"><b>Ingredientes:</b> <br> ${ingredientesInput.value}</p><p class="m-1"><b>SUGESTÃO DE USO:</b> <br> ${sugestaoInput.value}</p><div class="bg-white bg-opacity-25 rounded-lg m-1 mt-auto h-16"></div>`;
+}
+
          
          // Chama a função updateOutput quando o documento HTML terminar de carregar
          document.addEventListener('DOMContentLoaded', updateOutput);
@@ -126,6 +136,7 @@
          // Adiciona ouvintes de eventos para os elementos input de cor de fundo e cor de borda
          corFundoInput.addEventListener('input', updateOutput);
          corBordaInput.addEventListener('input', updateOutput);
+         urlImagemInput.addEventListener('input', updateOutput);
       </script>
    </body>
 </html>
